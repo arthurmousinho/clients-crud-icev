@@ -18,5 +18,6 @@ npm run dev
 ### Web (Front)
 ```
 cd web
+npm install
 npm run dev
 ```
