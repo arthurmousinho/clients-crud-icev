@@ -11,6 +11,7 @@ docker compose up -d
 ### Server (API)
 ```
 cd server
+npm install
 npm run dev
 ```
 
