@@ -49,16 +49,20 @@ export function App() {
         </CardHeader>
         <CardContent>
             <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead className="w-[350px]">ID</TableHead>
-                  <TableHead>Nome</TableHead>
-                  <TableHead>Email</TableHead>
-                  <TableHead>CPF</TableHead>
-                  <TableHead className="text-right">Editar</TableHead>
-                  <TableHead className="text-right">Remover</TableHead>
-                </TableRow>
-              </TableHeader>
+              {
+                clients.length > 1 && (
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead className="w-[350px]">ID</TableHead>
+                      <TableHead>Nome</TableHead>
+                      <TableHead>Email</TableHead>
+                      <TableHead>CPF</TableHead>
+                      <TableHead className="text-right">Editar</TableHead>
+                      <TableHead className="text-right">Remover</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                )
+              }
               <TableBody>
                 {clients.map(client => {
                   return (
