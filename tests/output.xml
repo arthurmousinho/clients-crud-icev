@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.0 (Python 3.11.7 on darwin)" generated="2024-05-23T14:57:10.120849" rpa="false" schemaversion="5">
+<suite id="s1" name="Interface" source="/Users/arthursilvamousinho/Desktop/icev/testes-icev/tests/interface.robot">
+<test id="s1-t1" name="Abrir Página e Verificar Título" line="9">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2024-05-23T14:57:10.197236" level="INFO">Opening browser 'Chrome' to base url 'http://localhost:5173/'.</msg>
+<arg>${URL}</arg>
+<arg>${BROWSER}</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2024-05-23T14:57:10.197063" elapsed="1.553433"/>
+</kw>
+<kw name="Get Title" owner="SeleniumLibrary">
+<msg time="2024-05-23T14:57:11.762480" level="INFO">${title} = Cadastro de Clientes</msg>
+<var>${title}</var>
+<doc>Returns the title of the current page.</doc>
+<status status="PASS" start="2024-05-23T14:57:11.753205" elapsed="0.009312"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<arg>${title}</arg>
+<arg>Cadastro de Clientes</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2024-05-23T14:57:11.762798" elapsed="0.000463"/>
+</kw>
+<status status="PASS" start="2024-05-23T14:57:10.196665" elapsed="1.566818"/>
+</test>
+<status status="PASS" start="2024-05-23T14:57:10.121418" elapsed="1.642825"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="1" fail="0" skip="0" id="s1" name="Interface">Interface</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
