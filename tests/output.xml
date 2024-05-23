@@ -1,38 +1,203 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 7.0 (Python 3.11.7 on darwin)" generated="2024-05-23T14:57:10.120849" rpa="false" schemaversion="5">
-<suite id="s1" name="Interface" source="/Users/arthursilvamousinho/Desktop/icev/testes-icev/tests/interface.robot">
-<test id="s1-t1" name="Abrir Página e Verificar Título" line="9">
-<kw name="Open Browser" owner="SeleniumLibrary">
-<msg time="2024-05-23T14:57:10.197236" level="INFO">Opening browser 'Chrome' to base url 'http://localhost:5173/'.</msg>
-<arg>${URL}</arg>
-<arg>${BROWSER}</arg>
-<doc>Opens a new browser instance to the optional ``url``.</doc>
-<status status="PASS" start="2024-05-23T14:57:10.197063" elapsed="1.553433"/>
-</kw>
-<kw name="Get Title" owner="SeleniumLibrary">
-<msg time="2024-05-23T14:57:11.762480" level="INFO">${title} = Cadastro de Clientes</msg>
-<var>${title}</var>
-<doc>Returns the title of the current page.</doc>
-<status status="PASS" start="2024-05-23T14:57:11.753205" elapsed="0.009312"/>
+<robot generator="Robot 7.0 (Python 3.11.7 on darwin)" generated="2024-05-23T17:05:06.775642" rpa="false" schemaversion="5">
+<suite id="s1" name="Endpoints" source="/Users/arthursilvamousinho/Desktop/icev/testes-icev/tests/endpoints.robot">
+<test id="s1-t1" name="Testar Requisição GET" line="13">
+<kw name="GET" owner="RequestsLibrary">
+<msg time="2024-05-23T17:05:06.883627" level="INFO">GET Request : url=http://localhost:3333/clients 
+ path_url=/clients 
+ headers={'User-Agent': 'python-requests/2.32.2', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2024-05-23T17:05:06.883682" level="INFO">GET Response : url=http://localhost:3333/clients 
+ status=200, reason=OK 
+ headers={'vary': 'Origin', 'content-type': 'application/json; charset=utf-8', 'content-length': '110', 'Date': 'Thu, 23 May 2024 20:05:06 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=72'} 
+ body=[{"id":"26eac405-b5ab-4e06-88f7-22623232c28e","name":"Carlos","email":"carlos@example.com","cpf":"987654321"}] 
+ </msg>
+<msg time="2024-05-23T17:05:06.883743" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>${API_URL}/clients</arg>
+<doc>Sends a GET request.</doc>
+<status status="PASS" start="2024-05-23T17:05:06.877646" elapsed="0.006109"/>
 </kw>
 <kw name="Should Be Equal As Strings" owner="BuiltIn">
-<arg>${title}</arg>
-<arg>Cadastro de Clientes</arg>
+<msg time="2024-05-23T17:05:06.884127" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>200</arg>
 <doc>Fails if objects are unequal after converting them to strings.</doc>
-<status status="PASS" start="2024-05-23T14:57:11.762798" elapsed="0.000463"/>
+<status status="PASS" start="2024-05-23T17:05:06.883869" elapsed="0.000281"/>
 </kw>
-<status status="PASS" start="2024-05-23T14:57:10.196665" elapsed="1.566818"/>
+<kw name="Log" owner="BuiltIn">
+<msg time="2024-05-23T17:05:06.884398" level="INFO">[{"id":"26eac405-b5ab-4e06-88f7-22623232c28e","name":"Carlos","email":"carlos@example.com","cpf":"987654321"}]</msg>
+<arg>${response.text}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2024-05-23T17:05:06.884215" elapsed="0.000200"/>
+</kw>
+<doc>Este caso de teste verifica se os clientes estão sendo retornados</doc>
+<status status="PASS" start="2024-05-23T17:05:06.877270" elapsed="0.007207"/>
 </test>
-<status status="PASS" start="2024-05-23T14:57:10.121418" elapsed="1.642825"/>
+<test id="s1-t2" name="Testar Requisição POST" line="20">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2024-05-23T17:05:06.884788" level="INFO">Creating Session using : alias=http://localhost:3333, url=http://localhost:3333, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>${API_URL}</arg>
+<arg>${API_URL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2024-05-23T17:05:06.884716" elapsed="0.000137"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2024-05-23T17:05:06.885005" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
+<var>${headers}</var>
+<arg>Content-Type</arg>
+<arg>application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2024-05-23T17:05:06.884916" elapsed="0.000097"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2024-05-23T17:05:06.888274" level="INFO">POST Request : url=http://localhost:3333/clients 
+ path_url=/clients 
+ headers={'User-Agent': 'python-requests/2.32.2', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '69'} 
+ body={"name": "John Doe", "email": "john@example.com", "cpf": "123456789"} 
+ </msg>
+<msg time="2024-05-23T17:05:06.888300" level="INFO">POST Response : url=http://localhost:3333/clients 
+ status=201, reason=Created 
+ headers={'vary': 'Origin', 'content-length': '0', 'Date': 'Thu, 23 May 2024 20:05:06 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=72'} 
+ body=None 
+ </msg>
+<msg time="2024-05-23T17:05:06.888340" level="INFO">${response} = &lt;Response [201]&gt;</msg>
+<var>${response}</var>
+<arg>${API_URL}</arg>
+<arg>/clients</arg>
+<arg>data=${VALID_CLIENT_PAYLOAD}</arg>
+<arg>headers=${headers}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2024-05-23T17:05:06.885064" elapsed="0.003284"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<msg time="2024-05-23T17:05:06.888626" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>201</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2024-05-23T17:05:06.888421" elapsed="0.000224"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2024-05-23T17:05:06.888884" level="INFO"/>
+<arg>${response.text}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2024-05-23T17:05:06.888710" elapsed="0.000190"/>
+</kw>
+<doc>Este caso de teste verifica se um novo cliente é criado com sucesso</doc>
+<status status="PASS" start="2024-05-23T17:05:06.884564" elapsed="0.004388"/>
+</test>
+<test id="s1-t3" name="Testar Requisição GET por ID Existente" line="29">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2024-05-23T17:05:06.889243" level="INFO">Creating Session using : alias=http://localhost:3333, url=http://localhost:3333, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>${API_URL}</arg>
+<arg>${API_URL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2024-05-23T17:05:06.889187" elapsed="0.000115"/>
+</kw>
+<kw name="GET" owner="RequestsLibrary">
+<msg time="2024-05-23T17:05:06.891536" level="INFO">GET Request : url=http://localhost:3333/clients/26eac405-b5ab-4e06-88f7-22623232c28e 
+ path_url=/clients/26eac405-b5ab-4e06-88f7-22623232c28e 
+ headers={'User-Agent': 'python-requests/2.32.2', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2024-05-23T17:05:06.891560" level="INFO">GET Response : url=http://localhost:3333/clients/26eac405-b5ab-4e06-88f7-22623232c28e 
+ status=200, reason=OK 
+ headers={'vary': 'Origin', 'content-type': 'application/json; charset=utf-8', 'content-length': '108', 'Date': 'Thu, 23 May 2024 20:05:06 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=72'} 
+ body={"id":"26eac405-b5ab-4e06-88f7-22623232c28e","name":"Carlos","email":"carlos@example.com","cpf":"987654321"} 
+ </msg>
+<msg time="2024-05-23T17:05:06.891594" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>${API_URL}/clients/${VALID_CLIENT_ID}</arg>
+<doc>Sends a GET request.</doc>
+<status status="PASS" start="2024-05-23T17:05:06.889352" elapsed="0.002250"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<msg time="2024-05-23T17:05:06.891839" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2024-05-23T17:05:06.891656" elapsed="0.000201"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2024-05-23T17:05:06.892065" level="INFO">{"id":"26eac405-b5ab-4e06-88f7-22623232c28e","name":"Carlos","email":"carlos@example.com","cpf":"987654321"}</msg>
+<arg>${response.text}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2024-05-23T17:05:06.891905" elapsed="0.000174"/>
+</kw>
+<doc>Este caso de teste verifica se um cliente é retornado com sucesso quando o ID existe</doc>
+<status status="PASS" start="2024-05-23T17:05:06.889028" elapsed="0.003094"/>
+</test>
+<test id="s1-t4" name="Testar Requisição PUT" line="36">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2024-05-23T17:05:06.892455" level="INFO">Creating Session using : alias=http://localhost:3333, url=http://localhost:3333, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>${API_URL}</arg>
+<arg>${API_URL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2024-05-23T17:05:06.892401" elapsed="0.000149"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2024-05-23T17:05:06.892665" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
+<var>${headers}</var>
+<arg>Content-Type</arg>
+<arg>application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2024-05-23T17:05:06.892604" elapsed="0.000069"/>
+</kw>
+<kw name="PUT On Session" owner="RequestsLibrary">
+<msg time="2024-05-23T17:05:06.896849" level="INFO">PUT Request : url=http://localhost:3333/clients 
+ path_url=/clients 
+ headers={'User-Agent': 'python-requests/2.32.2', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '115'} 
+ body={"id": "26eac405-b5ab-4e06-88f7-22623232c28e" ,"name": "Carlos", "email": "carlos@example.com", "cpf": "987654321"} 
+ </msg>
+<msg time="2024-05-23T17:05:06.896875" level="INFO">PUT Response : url=http://localhost:3333/clients 
+ status=204, reason=No Content 
+ headers={'vary': 'Origin', 'Date': 'Thu, 23 May 2024 20:05:06 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=72'} 
+ body=None 
+ </msg>
+<msg time="2024-05-23T17:05:06.896949" level="INFO">${response} = &lt;Response [204]&gt;</msg>
+<var>${response}</var>
+<arg>${API_URL}</arg>
+<arg>/clients</arg>
+<arg>data=${UPDATED_CLIENT_PAYLOAD}</arg>
+<arg>headers=${headers}</arg>
+<doc>Sends a PUT request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2024-05-23T17:05:06.892719" elapsed="0.004239"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<msg time="2024-05-23T17:05:06.897241" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>204</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2024-05-23T17:05:06.897036" elapsed="0.000224"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2024-05-23T17:05:06.897488" level="INFO"/>
+<arg>${response.text}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2024-05-23T17:05:06.897315" elapsed="0.000187"/>
+</kw>
+<doc>Este caso de teste verifica se um cliente é atualizado com sucesso</doc>
+<status status="PASS" start="2024-05-23T17:05:06.892191" elapsed="0.005359"/>
+</test>
+<status status="PASS" start="2024-05-23T17:05:06.776150" elapsed="0.121556"/>
 </suite>
 <statistics>
 <total>
-<stat pass="1" fail="0" skip="0">All Tests</stat>
+<stat pass="4" fail="0" skip="0">All Tests</stat>
 </total>
 <tag>
 </tag>
 <suite>
-<stat pass="1" fail="0" skip="0" id="s1" name="Interface">Interface</stat>
+<stat pass="4" fail="0" skip="0" id="s1" name="Endpoints">Endpoints</stat>
 </suite>
 </statistics>
 <errors>
